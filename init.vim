@@ -32,7 +32,7 @@ call s:source_file('config\general.vim')
 call s:source_file('config\mappings.vim')
 call s:source_file('config\tabline.vim')
 
-colorscheme pencil
+colorscheme github
 set background=light
 
 set secure

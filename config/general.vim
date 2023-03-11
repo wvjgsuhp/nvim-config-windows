@@ -103,3 +103,89 @@ endfunction
 
 autocmd VimLeave * call SaveSess()
 autocmd VimEnter * nested call RestoreSess()
+
+augroup user_general_settings
+	autocmd!
+
+	" Show sign column only for normal file buffers.
+	if exists('&signcolumn')
+		autocmd FileType * if empty(&buftype)
+			\ | setlocal signcolumn=yes
+			\ | endif
+	endif
+
+	" Highlight current line only on focused normal buffer windows
+	autocmd WinEnter,BufEnter,InsertLeave *
+		\ if ! &cursorline && empty(&buftype)
+		\ | setlocal cursorline
+		\ | endif
+
+	" Hide cursor line when leaving normal non-diff windows
+	autocmd WinLeave,BufLeave,InsertEnter *
+		\ if &cursorline && ! &diff && empty(&buftype) && ! &pvw && ! pumvisible()
+		\ | setlocal nocursorline
+		\ | endif
+
+	" Reload vim configuration automatically on-save
+	autocmd BufWritePost $VIM_PATH/{*.vim,*.yaml,vimrc} ++nested
+		\ source $MYVIMRC | redraw
+
+	" Automatically set read-only for files being edited elsewhere
+	autocmd SwapExists * ++nested let v:swapchoice = 'o'
+
+	" Update diff comparison once leaving insert mode
+	autocmd InsertLeave * if &l:diff | diffupdate | endif
+
+	" Equalize window dimensions when resizing vim window
+	autocmd VimResized * wincmd =
+
+	" Force write shada on leaving nvim
+	autocmd VimLeave * if has('nvim') | wshada! | endif
+
+	" Check if file changed when its window is focus, more eager than 'autoread'
+	autocmd FocusGained * checktime
+
+	" autocmd Syntax * if line('$') > 5000 | syntax sync minlines=200 | endif
+
+	if has('nvim-0.5')
+		" Highlight yank
+		try
+			autocmd TextYankPost *
+				\ silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
+		endtry
+
+		" Neovim terminal settings
+		autocmd TermOpen * setlocal modifiable
+	endif
+
+	" Update filetype on save if empty
+	autocmd BufWritePost * ++nested
+		\ if &l:filetype ==# '' || exists('b:ftdetect')
+		\ |   unlet! b:ftdetect
+		\ |   filetype detect
+		\ | endif
+
+	" Reload Vim script automatically if setlocal autoread
+	autocmd BufWritePost,FileWritePost *.vim ++nested
+		\ if &l:autoread > 0 | source <afile> |
+		\   echo 'source ' . bufname('%') |
+		\ endif
+
+	" When editing a file, always jump to the last known cursor position.
+	" Credits: https://github.com/farmergreg/vim-lastplace
+	autocmd BufReadPost *
+		\ if index(['gitcommit', 'gitrebase', 'svn', 'hgcommit'], &filetype) == -1
+		\      && empty(&buftype) && ! &diff && ! &previewwindow
+		\      && line("'\"") > 0 && line("'\"") <= line("$")
+		\|   if line("w$") == line("$")
+		\|     execute "normal! g`\""
+		\|   elseif line("$") - line("'\"") > ((line("w$") - line("w0")) / 2) - 1
+		\|     execute "normal! g`\"zz"
+		\|   else
+		\|     execute "normal! \G'\"\<c-e>"
+		\|   endif
+		\|   if foldclosed('.') != -1
+		\|     execute 'normal! zvzz'
+		\|   endif
+		\| endif
+augroup END

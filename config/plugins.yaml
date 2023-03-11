@@ -45,11 +45,6 @@
   depends: nvim-web-devicons
   hook_post_source: lua require('plugins.nvim-tree')
 
-- repo: nvim-lualine/lualine.nvim
-  if: has('nvim-0.5')
-  on_event: VimEnter
-  hook_post_source: lua require('plugins.lualine')
-
 - repo: rcarriga/nvim-notify
   if: has('nvim-0.5')
   on_lua: notify
@@ -237,7 +232,6 @@
 
 - repo: rmagatti/auto-session
   if: has('nvim-0.5')
-  # depends: [ gitsigns.nvim, nvim-lspconfig ]
   on_event: VimEnter
   hook_source: lua require('plugins.auto-session')
   hook_add: |-
