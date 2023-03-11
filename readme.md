@@ -4,27 +4,27 @@
 
 1.  Dependencies
 
-  - Telescope
+    - Telescope
 
-    Install `rg`,
+      Install `rg`,
 
-    ```sh
-    choco install rg
-    ```
+      ```sh
+      choco install rg
+      ```
 
-  - fzf
+    - fzf
 
-    Install `ag`,
+      Install `ag`,
 
-    ```sh
-    choco install ag
-    ```
+      ```sh
+      choco install ag
+      ```
 
-    Install `fzf`,
+      Install `fzf`,
 
-    ```sh
-    choco install fzf
-    ```
+      ```sh
+      choco install fzf
+      ```
 
 2. Install
 
