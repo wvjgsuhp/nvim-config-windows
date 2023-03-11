@@ -16,7 +16,7 @@ nvim
 
 ## Fixes
 
-1.  In `dein/repos/github.com/nvim-lua/plenary.nvim/lua/plenary/path.lua`,
+1.  In `dein/repos/github.com/nvim-lua/plenary.nvim/lua/plenary/path.lua:279`,
 
     ```lua
     -- old
