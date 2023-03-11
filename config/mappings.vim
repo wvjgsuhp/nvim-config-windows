@@ -74,7 +74,7 @@ nnoremap <Leader>fp /<C-r>0<cr>
 nnoremap <Leader>fiw yiw/<C-r>0<cr>
 
 " Fast saving
-nnoremap <Leader>w <cmd>write<CR>
+nnoremap <silent> <Leader>w <cmd>write<CR><CR>
 
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>
