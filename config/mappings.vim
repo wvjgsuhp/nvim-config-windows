@@ -96,3 +96,8 @@ if dein#tap('splitjoin.vim')
 	nmap sj <cmd>SplitjoinJoin<CR>
 	nmap ss <cmd>SplitjoinSplit<CR>
 endif
+
+if dein#tap('accelerated-jk')
+	nmap <silent> j <Plug>(accelerated_jk_gj)
+	nmap <silent> k <Plug>(accelerated_jk_gk)
+endif
