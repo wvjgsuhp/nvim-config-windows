@@ -27,7 +27,7 @@ noremap <Leader>l $
 " Open terminal
 noremap <Leader>z <cmd>terminal<cr>i
 noremap <Leader>zj <cmd>split<cr><bar><cmd>wincmd j<cr><bar><cmd>terminal<cr>13<c-w>_i
-noremap <Leader>zl <cmd>vsplit<cr><bar><cmd>terminal<cr>i
+noremap <Leader>zl <cmd>vsplit<cr><bar><cmd>wincmd l<cr><bar><cmd>terminal<cr>i
 
 " Preview markdown
 noremap <Leader>mp <cmd>term glow %<cr>

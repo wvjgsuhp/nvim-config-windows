@@ -312,9 +312,6 @@ local setup = function()
 					'rg',
 					'--smart-case',
 					'--hidden',
-					'--no-ignore-vcs',
-					'--glob',
-					'!.git',
 					'--files',
 				}
 			},
