@@ -101,3 +101,8 @@ if dein#tap('accelerated-jk')
   nmap <silent> j <Plug>(accelerated_jk_gj)
   nmap <silent> k <Plug>(accelerated_jk_gk)
 endif
+
+if dein#tap('vim-choosewin')
+	nmap -         <Plug>(choosewin)
+	nmap <Leader>- <cmd>ChooseWinSwapStay<CR>
+endif

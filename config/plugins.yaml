@@ -30,6 +30,12 @@
     let g:tq_map_keys = 0
     let g:tq_use_vim_autocomplete = 0
 
+- repo: t9md/vim-choosewin
+  on_map: { n: <Plug> }
+  hook_add: |-
+    let g:choosewin_label = 'ADFGHJKLUIOPQWERT'
+    let g:choosewin_label_padding = 5
+
 # ==========================================
 # Interface
 # ---------
