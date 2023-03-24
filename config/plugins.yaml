@@ -45,6 +45,7 @@
 - { repo: haya14busa/vim-edgemotion, on_map: { nx: <Plug> }}
 - { repo: t9md/vim-quickhl, on_map: { nx: <Plug> }}
 - { repo: rhysd/accelerated-jk, on_map: { n: <Plug> }, if: $SUDO_USER == '' }
+- { repo: SmiteshP/nvim-navic, on_event: VimEnter }
 
 - repo: kyazdani42/nvim-tree.lua
   on_event: VimEnter
@@ -158,6 +159,9 @@
   if: has('nvim-0.5')
   on_event: VimEnter
   hook_post_source: lua require('plugins.lspconfig').setup()
+
+# - repo: mfussenegger/nvim-jdtls
+  # on_ft: [java]
 
 - repo: williamboman/nvim-lsp-installer
   if: has('nvim-0.7')
@@ -339,5 +343,4 @@
 - repo: tpope/vim-surround
 - repo: junegunn/fzf
 - repo: junegunn/fzf.vim
-
-#  vim: set ts=2 sw=2 tw=80 et :
+  on_event: VimEnter

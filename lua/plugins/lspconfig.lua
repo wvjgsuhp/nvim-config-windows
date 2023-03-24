@@ -14,10 +14,10 @@ local on_attach = function(client, bufnr)
 	map_buf('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
 
 	-- Short-circuit for Helm template files
-	if vim.bo[bufnr].buftype ~= '' or vim.bo[bufnr].filetype == 'helm' then
-		require('user').diagnostic.disable(bufnr)
-		return
-	end
+	-- if vim.bo[bufnr].buftype ~= '' or vim.bo[bufnr].filetype == 'helm' then
+	-- 	require('user').diagnostic.disable(bufnr)
+	-- 	return
+	-- end
 
 	map_buf('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 	map_buf('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -78,6 +78,11 @@ local on_attach = function(client, bufnr)
 				autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
 			augroup END
 		]], false)
+	end
+
+	-- navic
+	if client.server_capabilities.documentSymbolProvider then
+		require("nvim-navic").attach(client, bufnr)
 	end
 end
 
@@ -169,7 +174,6 @@ local function setup()
 	-- See https://github.com/williamboman/nvim-lsp-installer
 	local lsp_installer = require('nvim-lsp-installer')
 	lsp_installer.setup()
-
 	-- Setup language servers using nvim-lspconfig
 	local lspconfig = require('lspconfig')
 	for _, ls in pairs(lsp_installer.get_installed_servers()) do
@@ -202,4 +206,3 @@ return {
 	setup = setup,
 	on_attach = on_attach,
 }
--- vim: set ts=2 sw=2 tw=80 noet :

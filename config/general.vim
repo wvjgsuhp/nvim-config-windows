@@ -3,14 +3,15 @@ let g:python3_host_prog = $HOME . '/.config/nvim/env/bin/python3'
 set cmdheight=0
 set clipboard+=unnamedplus     " Yank without explicit registration
 set ignorecase
+set winbar+=%{%v:lua.require'nvim-navic'.get_location()%}
 
 " Statusline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_left_sep = ' '
-let g:airline_right_sep = ' '
+let g:airline_stl_path_style = 'short'
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
 let g:airline_section_z = airline#section#create([g:airline_symbols.colnr, '%v'])
 let g:airline_detect_spell = 0
 let g:airline#extensions#default#section_truncate_width = {
@@ -56,8 +57,12 @@ set tabstop=2 shiftwidth=2 expandtab
 let g:vmt_list_item_char = '-'
 
 " fzf x ag
-command! -bang -nargs=* Ag call fzf#vim#grep('ag --path-to-ignore ~/.ignore --column --numbers --smart-case --noheading --color ' . shellescape(<q-args>), 1)
-set rtp+=~/scoop/shims/fzf
+" command! -bang -nargs=* Ag call fzf#vim#grep('ag --path-to-ignore ~/.ignore --column --numbers --smart-case --noheading --color ' . shellescape(<q-args>), 1)
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore --color', <bang>0)
+" scoop
+" set rtp+=~/scoop/shims/fzf
+" choco
+set rtp+=/c/ProgramData/chocolatey/bin/fzf
 
 " Formatting
 let g:neoformat_sql_sqlformat = {
@@ -72,15 +77,17 @@ let g:neoformat_python_autopep8 = {
 
 augroup formatting
   autocmd!
+  autocmd BufWritePre *.html Neoformat
+  autocmd BufWritePre *.java Neoformat
   autocmd BufWritePre *.js Neoformat
+  autocmd BufWritePre *.json Neoformat
   autocmd BufWritePre *.jsx Neoformat
+  autocmd BufWritePre *.md Neoformat
+  autocmd BufWritePre *.py Neoformat
+  autocmd BufWritePre *.rs Neoformat
+  autocmd BufWritePre *.sql Neoformat
   autocmd BufWritePre *.ts Neoformat
   autocmd BufWritePre *.tsx Neoformat
-  autocmd BufWritePre *.json Neoformat
-  autocmd BufWritePre *.py Neoformat
-  autocmd BufWritePre *.md Neoformat
-  autocmd BufWritePre *.sql Neoformat
-  autocmd BufWritePre *.rs Neoformat
 augroup END
 
 " Save sessions

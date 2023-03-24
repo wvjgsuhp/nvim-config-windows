@@ -21,7 +21,7 @@ noremap <Leader>9 9gt
 noremap <Leader>0 <cmd>tablast<cr>
 
 " Jump to the beginning/end of a line
-noremap <Leader>hh ^
+noremap <Leader>h ^
 noremap <Leader>l $
 
 " Open terminal
@@ -74,7 +74,8 @@ nnoremap <Leader>fp /<C-r>0<cr>
 nnoremap <Leader>fiw yiw/<C-r>0<cr>
 
 " Fast saving
-nnoremap <silent> <Leader>w <cmd>write<CR><CR>
+nnoremap <Leader>w <cmd>write<CR>:<esc>
+nnoremap <C-s> <cmd>write<CR>:<esc>
 
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>
@@ -89,7 +90,7 @@ nnoremap <silent> <A-}> <cmd>bn<CR>
 nnoremap <silent> <A-{> <cmd>bp<CR>
 
 if dein#tap('nvim-tree.lua')
-	nnoremap <Leader>e <cmd>NvimTreeToggle .<cr>
+	nnoremap <Leader>e <cmd>NvimTreeToggle .<cr>:NvimTreeResize 34<cr>
 endif
 
 if dein#tap('splitjoin.vim')
