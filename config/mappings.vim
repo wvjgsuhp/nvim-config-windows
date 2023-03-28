@@ -107,3 +107,11 @@ if dein#tap('vim-choosewin')
 	nmap -         <Plug>(choosewin)
 	nmap <Leader>- <cmd>ChooseWinSwapStay<CR>
 endif
+
+if dein#tap('hop.nvim')
+	noremap <Leader>fw :HopWord<cr>
+	noremap <Leader>fa :HopAnywhere<cr>
+	noremap <Leader>fl :HopLine<cr>
+	noremap <Leader>fc :HopChar1<cr>
+	noremap <Leader>fb :HopChar2<cr>
+endif

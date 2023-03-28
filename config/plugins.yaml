@@ -315,6 +315,10 @@
 # ==========================================
 # Operators and text objects
 # ---------
+- repo: phaazon/hop.nvim
+  on_cmd: [HopWord, HopAnywhere, HopLine, HopChar1, HopChar2]
+  hook_post_source: lua require'hop'.setup()
+
 - repo: machakann/vim-sandwich
   on_map:
     nxo: [ <Plug>(operator-sandwich-, <Plug>(textobj-sandwich- ]
