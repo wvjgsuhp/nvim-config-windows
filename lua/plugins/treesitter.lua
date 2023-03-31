@@ -3,35 +3,52 @@
 -- rafi settings
 
 -- Setup extra parsers.
-local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
+local install_config = require("nvim-treesitter.install")
+install_config.prefer_git = false
+install_config.compilers = { "zig", "gcc" }
+
+local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
 
 parser_configs.http = {
 	install_info = {
-		url = 'https://github.com/NTBBloodbath/tree-sitter-http',
-		files = { 'src/parser.c' },
-		branch = 'main',
+		url = "https://github.com/NTBBloodbath/tree-sitter-http",
+		files = { "src/parser.c" },
+		branch = "main",
 	},
-	filetype = 'http',
+	filetype = "http",
 }
 
 -- Setup treesitter
-require('nvim-treesitter.configs').setup({
+require("nvim-treesitter.configs").setup({
 	-- all, maintained, or list of languages
 	ensure_installed = {
-		'bash', 'c', 'clojure', 'cmake', 'comment', 'commonlisp',
-		'cpp', 'css', 'dart', 'dockerfile', 'dot', 'fennel', 'fish',
-		'go', 'gomod', 'gowork', 'graphql', 'hack', 'haskell', 'hcl',
-		'help', 'html', 'http', 'java', 'javascript', 'jsdoc', 'json',
-		'json5', 'jsonc', 'julia', 'kotlin', 'latex', 'llvm', 'lua',
-		'make', 'markdown', 'ninja', 'nix', 'norg', 'perl', 'php',
-		'pug', 'python', 'query', 'r', 'regex', 'rst', 'ruby', 'rust',
-		'scala', 'scheme', 'scss', 'svelte', 'todotxt', 'toml', 'tsx',
-		'typescript', 'vala', 'vim', 'vue', 'yaml', 'zig',
+		"bash",
+		"c",
+		"css",
+		"dockerfile",
+		"dot",
+		"fish",
+		"help",
+		"html",
+		"java",
+		"javascript",
+		"json",
+		"json5",
+		"jsonc",
+		"lua",
+		"markdown",
+		"python",
+		"regex",
+		"rust",
+		"tsx",
+		"typescript",
+		"vim",
+		"yaml",
 	},
 
 	highlight = {
 		enable = true,
-		disable = { 'vim' },
+		disable = { "vim" },
 	},
 
 	additional_vim_regex_highlighting = false,
@@ -63,10 +80,10 @@ require('nvim-treesitter.configs').setup({
 			lookahead = true,
 			keymaps = {
 				-- You can use the capture groups defined in textobjects.scm
-				['af'] = '@function.outer',
-				['if'] = '@function.inner',
-				['ac'] = '@class.outer',
-				['ic'] = '@class.inner',
+				["af"] = "@function.outer",
+				["if"] = "@function.inner",
+				["ac"] = "@class.outer",
+				["ic"] = "@class.inner",
 			},
 		},
 	},
@@ -82,13 +99,12 @@ require('nvim-treesitter.configs').setup({
 	autotag = {
 		enable = true,
 		filetypes = {
-			'html',
-			'javascript',
-			'javascriptreact',
-			'typescriptreact',
-			'svelte',
-			'vue',
-		}
-	}
-
+			"html",
+			"javascript",
+			"javascriptreact",
+			"typescriptreact",
+			"svelte",
+			"vue",
+		},
+	},
 })

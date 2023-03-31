@@ -90,7 +90,8 @@ nnoremap <silent> <A-}> <cmd>bn<CR>
 nnoremap <silent> <A-{> <cmd>bp<CR>
 
 if dein#tap('nvim-tree.lua')
-	nnoremap <Leader>e <cmd>NvimTreeToggle .<cr>:NvimTreeResize 34<cr>
+	nnoremap <Leader>e :NvimTreeToggle .<cr>:NvimTreeResize 34<cr>
+	nnoremap <Leader>fie :NvimTreeFindFile<cr>:NvimTreeResize 34<cr>:NvimTreeFocus<cr>
 endif
 
 if dein#tap('splitjoin.vim')
@@ -114,4 +115,8 @@ if dein#tap('hop.nvim')
 	noremap <Leader>fl :HopLine<cr>
 	noremap <Leader>fc :HopChar1<cr>
 	noremap <Leader>fb :HopChar2<cr>
+endif
+
+if dein#tap('omnisharp-vim')
+  autocmd FileType cs nmap <silent> <buffer> gD <Plug>(omnisharp_find_implementations)
 endif

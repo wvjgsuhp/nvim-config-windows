@@ -9,7 +9,7 @@ set winbar+=%{%v:lua.require'nvim-navic'.get_location()%}
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_stl_path_style = 'short'
+" let g:airline_stl_path_style = 'short'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_section_z = airline#section#create([g:airline_symbols.colnr, '%v'])
@@ -82,12 +82,14 @@ augroup formatting
   autocmd BufWritePre *.js Neoformat
   autocmd BufWritePre *.json Neoformat
   autocmd BufWritePre *.jsx Neoformat
+  autocmd BufWritePre *.lua Neoformat
   autocmd BufWritePre *.md Neoformat
   autocmd BufWritePre *.py Neoformat
   autocmd BufWritePre *.rs Neoformat
   autocmd BufWritePre *.sql Neoformat
   autocmd BufWritePre *.ts Neoformat
   autocmd BufWritePre *.tsx Neoformat
+  autocmd BufWritePre *.yaml Neoformat
 augroup END
 
 " Save sessions

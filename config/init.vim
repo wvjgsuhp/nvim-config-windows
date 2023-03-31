@@ -1,19 +1,3 @@
-" call plug#begin()
-
-" Plug 'vim-airline/vim-airline'
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'mracos/mermaid.vim'
-" Plug 'mzlogin/vim-markdown-toc'
-" Plug 'tpope/vim-commentary'
-" Plug 'tpope/vim-fugitive'
-" Plug 'tpope/vim-repeat'
-" Plug 'tpope/vim-surround'
-" Plug 'neovim/nvim-lspconfig'
-" Plug 'sbdchd/neoformat'
-
-" call plug#end()
-
-
 " Configuration and plugin-manager manager :)
 " ---
 " Maintainer: Rafael Bodill
