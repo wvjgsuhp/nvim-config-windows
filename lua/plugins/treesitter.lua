@@ -28,7 +28,7 @@ require("nvim-treesitter.configs").setup({
 		"dockerfile",
 		"dot",
 		"fish",
-		"help",
+		-- "help",
 		"html",
 		"java",
 		"javascript",

@@ -4,14 +4,15 @@ set cmdheight=0
 set clipboard+=unnamedplus     " Yank without explicit registration
 set ignorecase
 set winbar+=%{%v:lua.require'nvim-navic'.get_location()%}
+" set noshellslash
 
 " Statusline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_alt_sep = '|'
-" let g:airline_stl_path_style = 'short'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
+let g:airline_section_y = '%{strftime("%H:%M")}'
 let g:airline_section_z = airline#section#create([g:airline_symbols.colnr, '%v'])
 let g:airline_detect_spell = 0
 let g:airline#extensions#default#section_truncate_width = {
@@ -57,8 +58,8 @@ set tabstop=2 shiftwidth=2 expandtab
 let g:vmt_list_item_char = '-'
 
 " fzf x ag
-" command! -bang -nargs=* Ag call fzf#vim#grep('ag --path-to-ignore ~/.ignore --column --numbers --smart-case --noheading --color ' . shellescape(<q-args>), 1)
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore --color', <bang>0)
+command! -bang -nargs=* Ag call fzf#vim#grep('ag --path-to-ignore ~/.ignore --column --numbers --smart-case --noheading --color ' . shellescape(<q-args>), 1)
+" command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore --color', <bang>0)
 " scoop
 " set rtp+=~/scoop/shims/fzf
 " choco
@@ -75,22 +76,22 @@ let g:neoformat_python_autopep8 = {
   \ 'args': ['--max-line-length=80', '--experimental'],
 \ }
 
-augroup formatting
-  autocmd!
-  autocmd BufWritePre *.html Neoformat
-  autocmd BufWritePre *.java Neoformat
-  autocmd BufWritePre *.js Neoformat
-  autocmd BufWritePre *.json Neoformat
-  autocmd BufWritePre *.jsx Neoformat
-  autocmd BufWritePre *.lua Neoformat
-  autocmd BufWritePre *.md Neoformat
-  autocmd BufWritePre *.py Neoformat
-  autocmd BufWritePre *.rs Neoformat
-  autocmd BufWritePre *.sql Neoformat
-  autocmd BufWritePre *.ts Neoformat
-  autocmd BufWritePre *.tsx Neoformat
-  autocmd BufWritePre *.yaml Neoformat
-augroup END
+" augroup formatting
+"   autocmd!
+"   autocmd BufWritePre *.html Neoformat
+"   autocmd BufWritePre *.java Neoformat
+"   autocmd BufWritePre *.js Neoformat
+"   autocmd BufWritePre *.json Neoformat
+"   autocmd BufWritePre *.jsx Neoformat
+"   autocmd BufWritePre *.lua Neoformat
+"   autocmd BufWritePre *.md Neoformat
+"   autocmd BufWritePre *.py Neoformat
+"   autocmd BufWritePre *.rs Neoformat
+"   autocmd BufWritePre *.sql Neoformat
+"   autocmd BufWritePre *.ts Neoformat
+"   autocmd BufWritePre *.tsx Neoformat
+"   autocmd BufWritePre *.yaml Neoformat
+" augroup END
 
 " Save sessions
 fu! SaveSess()
@@ -136,8 +137,8 @@ augroup user_general_settings
         \ | endif
 
   " Reload vim configuration automatically on-save
-  autocmd BufWritePost $VIM_PATH/{*.vim,*.yaml,vimrc} ++nested
-        \ source $MYVIMRC | redraw
+  " autocmd BufWritePost $VIM_PATH/{*.vim,*.yaml,vimrc} ++nested
+  "       \ source $MYVIMRC | redraw
 
   " Automatically set read-only for files being edited elsewhere
   autocmd SwapExists * ++nested let v:swapchoice = 'o'

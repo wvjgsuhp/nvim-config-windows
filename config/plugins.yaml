@@ -16,7 +16,6 @@
 # ==========================================
 # Commands
 # --------
-
 - repo: mzlogin/vim-markdown-toc
   on_cmd: [GenTocGFM, GenTocRedcarpet, GenTocGitLab, UpdateToc]
   hook_add: let g:vmt_auto_update_on_save = 0
@@ -36,6 +35,10 @@
     let g:choosewin_label = 'ADFGHJKLUIOPQWERT'
     let g:choosewin_label_padding = 5
 
+- repo: numToStr/Comment.nvim
+  on_event: VimEnter
+  hook_post_source: lua require('Comment').setup()
+
 # ==========================================
 # Interface
 # ---------
@@ -45,6 +48,11 @@
 - { repo: haya14busa/vim-edgemotion, on_map: { nx: <Plug> } }
 - { repo: t9md/vim-quickhl, on_map: { nx: <Plug> } }
 - { repo: rhysd/accelerated-jk, on_map: { n: <Plug> }, if: $SUDO_USER == '' }
+
+- repo: utilyre/barbecue.nvim
+  on_event: VimEnter
+  depends: [nvim-lspconfig, nvim-navic]
+  hook_post_source: lua require('barbecue').setup()
 
 - repo: SmiteshP/nvim-navic
   on_event: VimEnter
@@ -285,29 +293,11 @@
   hook_post_source: lua require('matchparen').setup()
 
 # Vimscript syntax/indent plugins
-- { repo: iloginow/vim-stylus, on_ft: stylus }
 - { repo: chrisbra/csv.vim, on_ft: csv }
 - { repo: tpope/vim-git, on_ft: [gitcommit, gitrebase, gitconfig] }
-- { repo: dag/vim-fish, on_ft: fish }
-- {
-    repo: mustache/vim-mustache-handlebars,
-    on_ft: [html, mustache, handlebars],
-  }
-- { repo: digitaltoad/vim-pug, on_ft: [pug, jade] }
-- { repo: keith/swift.vim, on_ft: swift }
 - { repo: lifepillar/pgsql.vim, on_ft: pgsql }
 - { repo: vim-jp/syntax-vim-ex, on_ft: vim }
 - { repo: MTDL9/vim-log-highlighting, on_ft: log }
-- { repo: tmux-plugins/vim-tmux, on_ft: tmux }
-- { repo: reasonml-editor/vim-reason-plus, on_ft: [reason, merlin] }
-
-- repo: towolf/vim-helm
-  on_ft: helm
-  hook_add: |-
-    autocmd user_events BufRead,BufNewFile */templates/*.{yaml,yml,tpl}
-      \ setfiletype helm
-
-- repo: mracos/mermaid.vim
 
 - repo: pearofducks/ansible-vim
   on_ft: [ansible, ansible_hosts, jinja2]
@@ -325,13 +315,6 @@
       \ setfiletype yaml.ansible
     autocmd user_events BufNewFile,BufRead */inventory/*.ini
       \ setfiletype ansible_hosts
-
-- repo: hashivim/vim-terraform
-  on_ft: terraform
-  on_cmd: [Terraform, TerraformFmt]
-  hook_add: |-
-    autocmd user_events BufNewFile,BufRead *.hcl setfiletype hcl
-    autocmd user_events BufNewFile,BufRead *.tf,*.tfvars setfiletype terraform
 
 # ==========================================
 # Operators and text objects
@@ -362,10 +345,16 @@
   on_map: { n: <Plug>Dsf }
   hook_add: let g:dsf_no_mappings = 1
 
-- repo: tpope/vim-commentary
 - repo: tpope/vim-fugitive
 - repo: tpope/vim-repeat
 - repo: tpope/vim-surround
 - repo: junegunn/fzf
 - repo: junegunn/fzf.vim
+  on_event: VimEnter
+
+# ==========================================
+# Buffer
+# --------
+
+- repo: chrisgrieser/nvim-early-retirement
   on_event: VimEnter

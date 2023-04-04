@@ -3,6 +3,8 @@ let mapleader = ' '
 
 " Go from terminal to normal mode
 tnoremap <Esc> <C-\><C-n>
+command! ToggleTerminal call interface#toggleTerminal()
+nnoremap <Leader>` :ToggleTerminal<cr>
 
 " Paste
 nnoremap <Leader>piw viwpyiw
@@ -38,9 +40,6 @@ noremap <Leader>q <cmd>e!<cr>
 " Open previous buffer
 noremap <Leader>bb <c-^><cr>
 
-" Fix incorrect highlight
-" noremap <Leader>ffs <cmd>colorscheme github<cr>
-
 " Yank
 nnoremap <Leader>yfn <cmd>let @+=expand("%")<CR><cmd>echo 'Yanked filename'<CR>
 nnoremap <Leader>yrp <cmd>let @+=expand("%:~:.")<CR><cmd>echo 'Yanked relative path'<CR>
@@ -51,7 +50,7 @@ nnoremap <Leader>yaa ggyG''
 nnoremap <Leader>dc j<cmd>foldclose<cr>kd1j
 
 " Delete current file
-nnoremap <Leader>rm <cmd>call delete(expand('%'))<bar>bd!<cr>
+nnoremap <Leader>rm <cmd>call delete(expand('%'))<bar>b#<bar>bd#<CR>
 
 " Close current buffer
 nnoremap <Leader>bd <cmd>b#<bar>bd#<CR>
@@ -72,9 +71,11 @@ nnoremap <Leader>agiw yiw:Ag <C-r>0<cr>
 " Find
 nnoremap <Leader>fp /<C-r>0<cr>
 nnoremap <Leader>fiw yiw/<C-r>0<cr>
+nnoremap <Leader>fn :Navbuddy<cr>
 
 " Fast saving
-nnoremap <Leader>w <cmd>write<CR>:<esc>
+nnoremap <Leader>w <cmd>write<CR>
+" nnoremap <Leader>w <cmd>write<CR>:<esc>
 nnoremap <C-s> <cmd>write<CR>:<esc>
 
 " Use ctrl-[hjkl] to select the active split!
