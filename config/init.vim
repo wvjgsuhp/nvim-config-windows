@@ -107,11 +107,11 @@ function! s:main()
 		endfor
 
 		" Try setting up the custom virtualenv created by ./venv.sh
-		let l:virtualenv = $VIM_DATA_PATH . '/venv/bin/python'
-		if empty(l:virtualenv) || ! filereadable(l:virtualenv)
-			" Fallback to old virtualenv location
-			let l:virtualenv = $VIM_DATA_PATH . '/venv/neovim3/bin/python'
-		endif
+		let l:virtualenv = $VIM_PATH . '\env\Scripts\python.exe'
+		" if empty(l:virtualenv) || ! filereadable(l:virtualenv)
+		" 	" Fallback to old virtualenv location
+		" 	let l:virtualenv = $VIM_PATH . '/venv/neovim3/bin/python'
+		" endif
 
 		" Python interpreter settings
 		if filereadable(l:virtualenv)
@@ -296,17 +296,7 @@ function! s:debug(msg)
 endfunction
 
 function! s:load_config(filename)
-	" Parse YAML/JSON config file
-	if a:filename =~# '\.json$'
-		" Parse JSON with built-in json_decode
-		let l:json = readfile(a:filename)
-		return has('nvim') ? json_decode(l:json) : json_decode(join(l:json))
-	elseif a:filename =~# '\.ya\?ml$'
-		" Parse YAML with common command-line utilities
-		return s:load_yaml(a:filename)
-	endif
-	call s:error('Unknown config file format ' . a:filename)
-	return ''
+	return s:load_yaml(a:filename)
 endfunction
 
 function! s:str2list(expr)
@@ -324,15 +314,8 @@ function! s:load_yaml(filename)
 		let s:convert_tool = s:find_yaml2json_method()
 	endif
 
-	if s:convert_tool ==# 'ruby'
-		let l:cmd = "ruby -e 'require \"json\"; require \"yaml\"; ".
-			\ "print JSON.generate YAML.load \$stdin.read'"
-	elseif s:convert_tool ==# 'python'
-		let l:cmd = "python -c 'import sys,yaml,json; y=yaml.safe_load(sys.stdin.read()); print(json.dumps(y))'"
-	elseif s:convert_tool ==# 'yq'
-		let l:cmd = 'yq e -o=json -I 0'
-	else
-		let l:cmd = s:convert_tool
+	if s:convert_tool ==# 'python'
+		let l:cmd = 'python -c "import sys,yaml,json; y=yaml.safe_load(sys.stdin.read()); print(json.dumps(y))"'
 	endif
 
 	try
@@ -350,21 +333,21 @@ endfunction
 function! s:find_yaml2json_method()
 	if exists('*json_decode')
 		" Try different tools to convert YAML into JSON:
-		if executable('yj') && s:test_yaml2json('yj')
-			" See https://github.com/sclevine/yj
-			return 'yj'
-		elseif executable('yq') && s:test_yaml2json('yq')
-			" See https://github.com/mikefarah/yq
-			return 'yq'
-		elseif executable('yaml2json') && s:test_yaml2json('yaml2json')
-			" See https://github.com/bronze1man/yaml2json
-			return 'yaml2json'
-		" Or, try ruby. Which is installed on every macOS by default
-		" and has yaml built-in.
-		elseif executable('ruby') && s:test_ruby_yaml()
-			return 'ruby'
-		" Or, fallback to use python3 and PyYAML
-		elseif executable('python') && s:test_python_yaml()
+		" if executable('yj') && s:test_yaml2json('yj')
+		" 	" See https://github.com/sclevine/yj
+		" 	return 'yj'
+		" elseif executable('yq') && s:test_yaml2json('yq')
+		" 	" See https://github.com/mikefarah/yq
+		" 	return 'yq'
+		" elseif executable('yaml2json') && s:test_yaml2json('yaml2json')
+		" 	" See https://github.com/bronze1man/yaml2json
+		" 	return 'yaml2json'
+		" " Or, try ruby. Which is installed on every macOS by default
+		" " and has yaml built-in.
+		" elseif executable('ruby') && s:test_ruby_yaml()
+		" 	return 'ruby'
+		" " Or, fallback to use python3 and PyYAML
+		if executable('python') && s:test_python_yaml()
 			return 'python'
 		endif
 		call s:error([
@@ -398,7 +381,7 @@ endfunction
 
 function! s:test_python_yaml()
 	" Test Python YAML capabilities
-	call system("python -c 'import sys,yaml,json'")
+	call system('python -c "import sys,yaml,json"')
 	return v:shell_error == 0
 endfunction
 
