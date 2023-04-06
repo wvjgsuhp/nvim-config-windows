@@ -27,7 +27,7 @@ noremap <Leader>h ^
 noremap <Leader>l $
 
 " Open terminal
-noremap <Leader>z <cmd>terminal<cr>i
+noremap <Leader>zz <cmd>terminal<cr>i
 noremap <Leader>zj <cmd>split<cr><bar><cmd>wincmd j<cr><bar><cmd>terminal<cr>13<c-w>_i
 noremap <Leader>zl <cmd>vsplit<cr><bar><cmd>wincmd l<cr><bar><cmd>terminal<cr>i
 
@@ -73,6 +73,9 @@ nnoremap <Leader>fp /<C-r>0<cr>
 nnoremap <Leader>fiw yiw/<C-r>0<cr>
 nnoremap <Leader>fn :Navbuddy<cr>
 
+" Toggle fold
+" nnoremap <CR> za
+
 " Fast saving
 nnoremap <Leader>w <cmd>write<CR>
 " nnoremap <Leader>w <cmd>write<CR>:<esc>
@@ -90,9 +93,12 @@ nnoremap <silent> <F24> <cmd>bp<CR>
 nnoremap <silent> <A-}> <cmd>bn<CR>
 nnoremap <silent> <A-{> <cmd>bp<CR>
 
+" Edit file
+nnoremap <Leader>ze :e ~/.zshrc<cr>
+
 if dein#tap('nvim-tree.lua')
 	nnoremap <Leader>e :NvimTreeToggle .<cr>:NvimTreeResize 34<cr>
-	nnoremap <Leader>fie :NvimTreeFindFile<cr>:NvimTreeResize 34<cr>:NvimTreeFocus<cr>
+	nnoremap <Leader>fe :NvimTreeFindFile<cr>:NvimTreeResize 34<cr>:NvimTreeFocus<cr>
 endif
 
 if dein#tap('splitjoin.vim')
@@ -120,4 +126,17 @@ endif
 
 if dein#tap('omnisharp-vim')
   autocmd FileType cs nmap <silent> <buffer> gD <Plug>(omnisharp_find_implementations)
+endif
+
+if dein#tap('sideways.vim')
+  noremap <Leader>sh :SidewaysLeft<cr>
+  noremap <Leader>sl :SidewaysRight<cr>
+  nmap <leader>si <Plug>SidewaysArgumentInsertBefore
+  nmap <leader>sa <Plug>SidewaysArgumentAppendAfter
+  nmap <leader>sI <Plug>SidewaysArgumentInsertFirst
+  nmap <leader>sA <Plug>SidewaysArgumentAppendLast
+endif
+
+if dein#tap('symbols-outline.nvim')
+  nmap <leader>fs :SymbolsOutline<cr>
 endif
