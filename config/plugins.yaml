@@ -187,9 +187,9 @@
 - { repo: kosayoda/nvim-lightbulb, on_source: nvim-lspconfig }
 - { repo: folke/lua-dev.nvim, on_source: nvim-lspconfig }
 
-- repo: ray-x/lsp_signature.nvim
-  if: has('nvim-0.6.1')
-  on_source: nvim-lspconfig
+# - repo: ray-x/lsp_signature.nvim
+#   if: has('nvim-0.6.1')
+#   on_source: nvim-lspconfig
 
 - repo: jose-elias-alvarez/null-ls.nvim
   if: has('nvim-0.7')

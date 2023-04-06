@@ -26,7 +26,7 @@ local on_attach = function(client, bufnr)
 	map_buf("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	map_buf("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
 	map_buf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	map_buf("n", ",s", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+	-- map_buf("n", ",s", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
 	map_buf("n", ",wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
 	map_buf("n", ",wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 	map_buf("n", ",wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
@@ -160,8 +160,8 @@ local function setup()
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
 	-- Configure signature help (,s) handler
-	vim.lsp.handlers["textDocument/signatureHelp"] =
-		vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+	-- vim.lsp.handlers["textDocument/signatureHelp"] =
+	-- 	vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 	-- Setup language servers using nvim-lsp-installer
 	-- See https://github.com/williamboman/nvim-lsp-installer
