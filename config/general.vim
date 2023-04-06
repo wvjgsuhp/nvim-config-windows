@@ -4,14 +4,21 @@ set cmdheight=0
 set clipboard+=unnamedplus     " Yank without explicit registration
 set ignorecase
 set winbar+=%{%v:lua.require'nvim-navic'.get_location()%}
+" set noshellslash
+
+if has('folding') && has('vim_starting')
+	set foldenable
+	set foldmethod=indent
+	set foldlevel=99
+endif
 
 " Statusline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_alt_sep = '|'
-" let g:airline_stl_path_style = 'short'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
+let g:airline_section_y = '%{strftime("%H:%M")}'
 let g:airline_section_z = airline#section#create([g:airline_symbols.colnr, '%v'])
 let g:airline_detect_spell = 0
 let g:airline#extensions#default#section_truncate_width = {
@@ -52,13 +59,14 @@ set showcmd
 set number                     " Show current line number
 set relativenumber             " Show relative line numbers
 set tabstop=2 shiftwidth=2 expandtab
+set exrc
 
 " Markdown TOC
 let g:vmt_list_item_char = '-'
 
 " fzf x ag
 " command! -bang -nargs=* Ag call fzf#vim#grep('ag --path-to-ignore ~/.ignore --column --numbers --smart-case --noheading --color ' . shellescape(<q-args>), 1)
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore --color', <bang>0)
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore', <bang>0)
 " scoop
 " set rtp+=~/scoop/shims/fzf
 " choco
