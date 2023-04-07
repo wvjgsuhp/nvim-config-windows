@@ -45,6 +45,7 @@ nnoremap <Leader>yfn <cmd>let @+=expand("%")<CR><cmd>echo 'Yanked filename'<CR>
 nnoremap <Leader>yrp <cmd>let @+=expand("%:~:.")<CR><cmd>echo 'Yanked relative path'<CR>
 nnoremap <Leader>yap <cmd>let @+=expand("%:p")<CR><cmd>echo 'Yanked absolute path'<CR>
 nnoremap <Leader>yaa ggyG''
+nnoremap <Leader>ypG VGyGp
 
 " Delete
 nnoremap <Leader>dc j<cmd>foldclose<cr>kd1j
@@ -77,8 +78,7 @@ nnoremap <Leader>fn :Navbuddy<cr>
 " nnoremap <CR> za
 
 " Fast saving
-nnoremap <Leader>w <cmd>write<CR>
-" nnoremap <Leader>w <cmd>write<CR>:<esc>
+nnoremap <Leader>w <cmd>write<CR>:<esc>
 nnoremap <C-s> <cmd>write<CR>:<esc>
 
 " Use ctrl-[hjkl] to select the active split!
@@ -107,8 +107,8 @@ if dein#tap('splitjoin.vim')
 endif
 
 if dein#tap('accelerated-jk')
-  nmap <silent> j <Plug>(accelerated_jk_gj)
-  nmap <silent> k <Plug>(accelerated_jk_gk)
+  nmap <silent> j <Plug>(accelerated_jk_gj)zz
+  nmap <silent> k <Plug>(accelerated_jk_gk)zz
 endif
 
 if dein#tap('vim-choosewin')
