@@ -38,7 +38,7 @@ noremap <Leader>mp <cmd>term glow %<cr>
 noremap <Leader>q <cmd>e!<cr>
 
 " Open previous buffer
-noremap <Leader>bb <c-^><cr>
+noremap <Leader>bb <c-^>
 
 " Yank
 nnoremap <Leader>yfn <cmd>let @+=expand("%")<CR><cmd>echo 'Yanked filename'<CR>
@@ -69,16 +69,24 @@ nnoremap <Leader>agp :Ag <C-r>0<cr>
 nnoremap <Leader>agiw yiw:Ag <C-r>0<cr>
 
 " Find
-nnoremap <Leader>fp /<C-r>0<cr>
-nnoremap <Leader>fiw yiw/<C-r>0<cr>
+nnoremap <Leader>fp /<C-r>0<cr>zz
+nnoremap <Leader>fiw yiw/<C-r>0<cr>zz
 nnoremap <Leader>fn :Navbuddy<cr>
 
-" Toggle fold
-" nnoremap <CR> za
+" Center focused line
+nmap <silent> u uzz
+nmap <silent> e ezz
+nmap <silent> <c-r> <c-r>zz
+nmap <silent> n nzz
+nmap <silent> N Nzz
+nmap <silent> G Gzz
+nmap <silent> w wzz
+nmap <silent> b bzz
+nmap <silent> `` ``zz
+cmap <expr> <cr> getcmdtype() =~ '^[/?]$' ? '<cr>zz' : '<cr>'
 
 " Fast saving
-nnoremap <Leader>w <cmd>write<CR>
-" nnoremap <Leader>w <cmd>write<CR>:<esc>
+nnoremap <Leader>w <cmd>write<CR>:<esc>
 nnoremap <C-s> <cmd>write<CR>:<esc>
 
 " Use ctrl-[hjkl] to select the active split!
@@ -107,8 +115,8 @@ if dein#tap('splitjoin.vim')
 endif
 
 if dein#tap('accelerated-jk')
-  nmap <silent> j <Plug>(accelerated_jk_gj)
-  nmap <silent> k <Plug>(accelerated_jk_gk)
+  nmap <silent> j <Plug>(accelerated_jk_gj)zz
+  nmap <silent> k <Plug>(accelerated_jk_gk)zz
 endif
 
 if dein#tap('vim-choosewin')

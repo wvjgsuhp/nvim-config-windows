@@ -144,8 +144,8 @@ augroup user_general_settings
         \ | endif
 
   " Reload vim configuration automatically on-save
-  autocmd BufWritePost $VIM_PATH/{*.vim,*.yaml,vimrc} ++nested
-        \ source $MYVIMRC | redraw
+  " autocmd BufWritePost $VIM_PATH/{*.vim,*.yaml,vimrc} ++nested
+        " \ source $MYVIMRC | redraw
 
   " Automatically set read-only for files being edited elsewhere
   autocmd SwapExists * ++nested let v:swapchoice = 'o'
