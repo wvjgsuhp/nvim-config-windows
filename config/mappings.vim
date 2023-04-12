@@ -45,6 +45,7 @@ nnoremap <Leader>yfn <cmd>let @+=expand("%")<CR><cmd>echo 'Yanked filename'<CR>
 nnoremap <Leader>yrp <cmd>let @+=expand("%:~:.")<CR><cmd>echo 'Yanked relative path'<CR>
 nnoremap <Leader>yap <cmd>let @+=expand("%:p")<CR><cmd>echo 'Yanked absolute path'<CR>
 nnoremap <Leader>yaa ggyG''
+nnoremap <Leader>ypG VGyGp
 
 " Delete
 nnoremap <Leader>dc j<cmd>foldclose<cr>kd1j
