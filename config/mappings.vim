@@ -75,15 +75,14 @@ nnoremap <Leader>fiw yiw/<C-r>0<cr>zz
 nnoremap <Leader>fn :Navbuddy<cr>
 
 " Center focused line
-nmap <silent> u uzz
-nmap <silent> e ezz
-nmap <silent> <c-r> <c-r>zz
-nmap <silent> n nzz
-nmap <silent> N Nzz
-nmap <silent> G Gzz
-nmap <silent> w wzz
-nmap <silent> b bzz
-nmap <silent> `` ``zz
+let line_moved_commands = ['u', 'e', '<c-r>', 'n', 'N', 'G', 'w', 'b', '``']
+for cmd in line_moved_commands
+  execute 'nmap <silent> '.cmd.' '.cmd.'zz'
+  execute 'vmap <silent> '.cmd.' '.cmd.'zz'
+endfor
+
+vmap <silent> j jzz
+vmap <silent> k kzz
 cmap <expr> <cr> getcmdtype() =~ '^[/?]$' ? '<cr>zz' : '<cr>'
 
 " Fast saving
