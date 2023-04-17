@@ -173,7 +173,6 @@
 # ==========================================
 # Completion and code analysis
 # ----------
-
 - repo: neovim/nvim-lspconfig
   if: has('nvim-0.5')
   on_event: VimEnter

@@ -65,11 +65,7 @@ set exrc
 let g:vmt_list_item_char = '-'
 
 " fzf x ag
-" command! -bang -nargs=* Ag call fzf#vim#grep('ag --path-to-ignore ~/.ignore --column --numbers --smart-case --noheading --color ' . shellescape(<q-args>), 1)
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore', <bang>0)
-" scoop
-" set rtp+=~/scoop/shims/fzf
-" choco
+command! -bang -nargs=* Ag call fzf#vim#grep('ag --path-to-ignore ~/.ignore --column --numbers --smart-case --noheading --color ' . shellescape(<q-args>), 1)
 set rtp+=/c/ProgramData/chocolatey/bin/fzf
 
 " Formatting
