@@ -158,9 +158,6 @@ vim.cmd [[
 	augroup END
 ]]
 
--- Mappings
-vim.keymap.set('n', '<Leader>ff', '<cmd>Telescope find_files<cr>')
-
 -- On-demand setup
 local setup = function()
 	local telescope = require('telescope')
@@ -392,7 +389,11 @@ local setup = function()
 				require('telescope.themes').get_cursor {
 					layout_config = { width = 0.35, height = 0.35 },
 				}
-			}
+			},
+      fzy_native = {
+        override_generic_sorter = false,
+        override_file_sorter = true,
+      }
 		}
 	}
 

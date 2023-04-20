@@ -18,6 +18,14 @@ parser_configs.http = {
 	filetype = "http",
 }
 
+local disable = function(lang, buf)
+  local max_filesize = 100 * 1024 -- 100 KB
+  local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+  if ok and stats and stats.size > max_filesize then
+    return true
+  end
+end
+
 -- Setup treesitter
 require("nvim-treesitter.configs").setup({
 	-- all, maintained, or list of languages
@@ -47,7 +55,7 @@ require("nvim-treesitter.configs").setup({
 
 	highlight = {
 		enable = true,
-		disable = { "vim" },
+		disable = disable,
 	},
 
 	additional_vim_regex_highlighting = false,

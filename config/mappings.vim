@@ -65,10 +65,6 @@ nnoremap <Leader>gdh <cmd>diffget //2<cr>
 nnoremap <Leader>gdl <cmd>diffget //3<cr>
 nnoremap <Leader>gpn 6kyyGpi
 
-" Search
-nnoremap <Leader>agp :Ag <C-r>0<cr>
-nnoremap <Leader>agiw yiw:Ag <C-r>0<cr>
-
 " Find
 nnoremap <Leader>fp /<C-r>0<cr>zz
 nnoremap <Leader>fiw yiw/<C-r>0<cr>zz
@@ -147,4 +143,14 @@ endif
 
 if dein#tap('symbols-outline.nvim')
   nmap <leader>fs :SymbolsOutline<cr>
+endif
+
+if dein#tap('fine-cmdline.nvim')
+  nnoremap : <cmd>FineCmdline<CR>
+  xnoremap : <cmd>FineCmdline '<,'><CR>
+endif
+
+if dein#tap('telescope.nvim')
+  nnoremap <Leader>ff :Telescope find_files<CR>
+  nnoremap <Leader>fg :Telescope live_grep<CR>
 endif
