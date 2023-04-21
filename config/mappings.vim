@@ -153,4 +153,5 @@ endif
 if dein#tap('telescope.nvim')
   nnoremap <Leader>ff :Telescope find_files<CR>
   nnoremap <Leader>fg :Telescope live_grep<CR>
+  nnoremap <Leader>fz :Telescope grep_string<CR>
 endif

@@ -299,12 +299,6 @@ local setup = function()
 				}
 			},
 			find_files = {
-				theme = 'dropdown',
-				previewer = false,
-				layout_config = {
-					width = width_for_nopreview,
-					height = height_dropdown_nopreview,
-				},
 				find_command = {
 					'rg',
 					'--smart-case',
@@ -391,7 +385,7 @@ local setup = function()
 				}
 			},
       fzy_native = {
-        override_generic_sorter = false,
+        override_generic_sorter = true,
         override_file_sorter = true,
       }
 		}
