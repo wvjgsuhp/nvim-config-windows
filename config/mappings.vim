@@ -121,11 +121,11 @@ if dein#tap('vim-choosewin')
 endif
 
 if dein#tap('hop.nvim')
-	noremap <Leader>fw :HopWord<cr>
-	noremap <Leader>fa :HopAnywhere<cr>
-	noremap <Leader>fl :HopLine<cr>
-	noremap <Leader>fc :HopChar1<cr>
-	noremap <Leader>fb :HopChar2<cr>
+	noremap <Leader>fw <cmd>HopWord<cr>
+	noremap <Leader>fa <cmd>HopAnywhere<cr>
+	noremap <Leader>fl <cmd>HopLine<cr>
+	noremap <Leader>fc <cmd>HopChar1<cr>
+	noremap <Leader>fb <cmd>HopChar2<cr>
 endif
 
 if dein#tap('omnisharp-vim')
@@ -133,8 +133,8 @@ if dein#tap('omnisharp-vim')
 endif
 
 if dein#tap('sideways.vim')
-  noremap <Leader>sh :SidewaysLeft<cr>
-  noremap <Leader>sl :SidewaysRight<cr>
+  noremap <Leader>sh <cmd>SidewaysLeft<cr>
+  noremap <Leader>sl <cmd>SidewaysRight<cr>
   nmap <leader>si <Plug>SidewaysArgumentInsertBefore
   nmap <leader>sa <Plug>SidewaysArgumentAppendAfter
   nmap <leader>sI <Plug>SidewaysArgumentInsertFirst
@@ -151,7 +151,8 @@ if dein#tap('fine-cmdline.nvim')
 endif
 
 if dein#tap('telescope.nvim')
-  nnoremap <Leader>ff :Telescope find_files<CR>
-  nnoremap <Leader>fg :Telescope live_grep<CR>
-  nnoremap <Leader>fz :Telescope grep_string<CR>
+  nnoremap <Leader>ff <cmd>Telescope find_files<CR>
+  nnoremap <Leader>fg <cmd>Telescope live_grep<CR>
+  nnoremap <Leader>fz <cmd>Telescope grep_string<CR>
+  nnoremap <Leader>cbf <cmd>Telescope current_buffer_fuzzy_find<CR>
 endif
