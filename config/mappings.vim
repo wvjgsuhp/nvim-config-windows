@@ -70,6 +70,10 @@ nnoremap <Leader>fp /<C-r>0<cr>zz
 nnoremap <Leader>fiw yiw/<C-r>0<cr>zz
 nnoremap <Leader>fn :Navbuddy<cr>
 
+" Use backspace key for matching parens
+nnoremap <BS> %
+xnoremap <BS> %
+
 " Center focused line
 let line_moved_commands = ['u', 'e', '<c-r>', 'n', 'N', 'G', 'w', 'b', '``']
 for cmd in line_moved_commands
@@ -82,8 +86,10 @@ vmap <silent> k kzz
 cmap <expr> <cr> getcmdtype() =~ '^[/?]$' ? '<cr>zz' : '<cr>'
 
 " Fast saving
-nnoremap <Leader>w <cmd>write<CR>:<esc>
-nnoremap <C-s> <cmd>write<CR>:<esc>
+nnoremap <Leader>w <cmd>silent write<CR>
+nnoremap <C-s> <cmd>silent write<CR>
+xnoremap <C-s> <cmd>silent write<CR>
+cnoremap <C-s> <cmd>silent write<CR>
 
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>
