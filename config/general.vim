@@ -6,7 +6,6 @@ set ignorecase
 set winbar+=%{%v:lua.require'nvim-navic'.get_location()%}
 set showtabline=0
 set synmaxcol=2048
-" set noshellslash
 
 if has('folding') && has('vim_starting')
 	set foldenable
@@ -29,7 +28,7 @@ let g:airline_powerline_fonts = 1
 " let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_section_y = '%{Recording()} %{strftime("%H:%M")}'
+let g:airline_section_y = '%{Recording()}%{strftime("%H:%M")}'
 let g:airline_section_z = airline#section#create([g:airline_symbols.colnr, '%v'])
 let g:airline_detect_spell = 0
 let g:airline#extensions#default#section_truncate_width = {

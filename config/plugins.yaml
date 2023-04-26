@@ -315,6 +315,9 @@
     autocmd user_events BufNewFile,BufRead */inventory/*.ini
       \ setfiletype ansible_hosts
 
+- repo: tpope/vim-sleuth
+  on_event: VimEnter
+
 # ==========================================
 # Operators and text objects
 # ---------
