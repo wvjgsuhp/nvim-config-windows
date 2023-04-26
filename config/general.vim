@@ -78,7 +78,7 @@ let g:vmt_list_item_char = '-'
 " scoop
 " set rtp+=~/scoop/shims/fzf
 " choco
-set rtp+=/c/ProgramData/chocolatey/bin/fzf
+" set rtp+=/c/ProgramData/chocolatey/bin/fzf
 
 " Formatting
 let g:neoformat_sql_sqlformat = {

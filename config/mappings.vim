@@ -67,7 +67,7 @@ nnoremap <Leader>gpn 6kyyGpi
 
 " Find
 nnoremap <Leader>fp /<C-r>0<cr>zz
-nnoremap <Leader>fiw yiw/<C-r>0<cr>zz
+nnoremap <Leader>fiw yiw/<C-r>0<cr>Nzz
 nnoremap <Leader>fn :Navbuddy<cr>
 
 " Use backspace key for matching parens
@@ -75,7 +75,7 @@ nnoremap <BS> %
 xnoremap <BS> %
 
 " Center focused line
-let line_moved_commands = ['u', 'e', '<c-r>', 'n', 'N', 'G', 'w', 'b', '``']
+let line_moved_commands = ['u', 'e', '<c-r>', 'n', 'N', 'G', 'w', 'b', '``', 'p']
 for cmd in line_moved_commands
   execute 'nmap <silent> '.cmd.' '.cmd.'zz'
   execute 'vmap <silent> '.cmd.' '.cmd.'zz'
