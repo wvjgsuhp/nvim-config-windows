@@ -6,11 +6,12 @@ set ignorecase
 set winbar+=%{%v:lua.require'nvim-navic'.get_location()%}
 set showtabline=0
 set synmaxcol=2048
+set colorcolumn=80
 
 if has('folding') && has('vim_starting')
-	set foldenable
-	set foldmethod=indent
-	set foldlevel=99
+  set foldenable
+  set foldmethod=indent
+  set foldlevel=99
 endif
 
 function! Recording()
@@ -28,7 +29,8 @@ let g:airline_powerline_fonts = 1
 " let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_section_y = '%{Recording()}%{strftime("%H:%M")}'
+let g:airline_section_c = '%{Recording()}%f%m'
+let g:airline_section_y = '%{strftime("%H:%M")}'
 let g:airline_section_z = airline#section#create([g:airline_symbols.colnr, '%v'])
 let g:airline_detect_spell = 0
 let g:airline#extensions#default#section_truncate_width = {
@@ -62,14 +64,17 @@ let g:airline_mode_map = {
 " Mitigate error with git bash https://github.com/vim-airline/vim-airline/issues/2479
 let g:airline#extensions#branch#vcs_checks = []
 
-let mapleader = ' '
-
 set clipboard+=unnamedplus     " Yank without explicit registration
 set showcmd
 set number                     " Show current line number
 set relativenumber             " Show relative line numbers
 set tabstop=2 shiftwidth=2 expandtab
 set exrc
+
+augroup tabs
+  autocmd!
+  autocmd Filetype sql setlocal tabstop=4 shiftwidth=4
+augroup END
 
 " Markdown TOC
 let g:vmt_list_item_char = '-'

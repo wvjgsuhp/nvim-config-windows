@@ -30,75 +30,13 @@ require('null-ls').setup({
 			disabled_filetypes = { 'gitcommit' },
 		}),
 
-		-- Ansible
-		builtins.diagnostics.ansiblelint.with({
-			runtime_condition = has_exec('ansible-lint'),
-			extra_filetypes = { 'yaml', 'yaml.ansible' },
-		}),
-
 		-- Javascript
 		builtins.diagnostics.eslint,
-
-		-- Go
-		builtins.formatting.gofmt.with({
-			runtime_condition = has_exec('gofmt'),
-		}),
-		builtins.formatting.gofumpt.with({
-			runtime_condition = has_exec('gofumpt'),
-		}),
-		builtins.formatting.golines.with({
-			runtime_condition = has_exec('golines'),
-		}),
 
 		-- Lua
 		builtins.formatting.stylua,
 
 		-- SQL
 		builtins.formatting.sqlformat,
-
-		-- Shell
-		-- builtins.code_actions.shellcheck,
-		builtins.diagnostics.shellcheck.with({
-			runtime_condition = has_exec('shellcheck'),
-			extra_filetypes = { 'bash' },
-		}),
-		builtins.formatting.shfmt.with({
-			runtime_condition = has_exec('shfmt'),
-			extra_filetypes = { 'bash' },
-		}),
-		builtins.formatting.shellharden.with({
-			runtime_condition = has_exec('shellharden'),
-			extra_filetypes = { 'bash' },
-		}),
-
-		-- Docker
-		builtins.diagnostics.hadolint.with({
-			runtime_condition = has_exec('hadolint'),
-		}),
-
-		-- Vim
-		builtins.diagnostics.vint.with({
-			runtime_condition = has_exec('vint'),
-		}),
-
-		-- Markdown
-		builtins.diagnostics.markdownlint.with({
-			runtime_condition = has_exec('markdownlint'),
-			extra_filetypes = { 'vimwiki' },
-		}),
-		builtins.diagnostics.proselint.with({
-			runtime_condition = has_exec('proselint'),
-			extra_filetypes = { 'vimwiki' },
-		}),
-		-- builtins.code_actions.proselint.with({
-		-- 	runtime_condition = has_exec('proselint'),
-		-- 	extra_filetypes = { 'vimwiki' },
-		-- }),
-		-- builtins.diagnostics.write_good.with({
-		-- 	runtime_condition = has_exec('write-good'),
-		-- 	extra_filetypes = { 'vimwiki' },
-		-- }),
-		-- builtins.hover.dictionary.with({ extra_filetypes = { 'vimwiki' } }),
-		-- builtins.completion.spell.with({ extra_filetypes = { 'vimwiki' } }),
 	},
 })

@@ -48,6 +48,11 @@
 - { repo: t9md/vim-quickhl, on_map: { nx: <Plug> } }
 - { repo: rhysd/accelerated-jk, on_map: { n: <Plug> }, if: $SUDO_USER == '' }
 
+# - repo: folke/noice.nvim
+#   on_event: VimEnter
+#   depends: [nui.nvim]
+#   hook_post_source: lua require('plugins.noice')
+
 - repo: RRethy/vim-illuminate
   on_event: VimEnter
 
@@ -317,6 +322,7 @@
 
 - repo: tpope/vim-sleuth
   on_event: VimEnter
+  hook_post_source: lua require('plugins.sleuth')
 
 # ==========================================
 # Operators and text objects

@@ -107,8 +107,8 @@ nnoremap <silent> <A-{> <cmd>bp<CR>
 nnoremap <Leader>ze :e ~/.zshrc<cr>
 
 if dein#tap('nvim-tree.lua')
-	nnoremap <Leader>e :NvimTreeToggle .<cr>:NvimTreeResize 34<cr>
-	nnoremap <Leader>fe :NvimTreeFindFile<cr>:NvimTreeResize 34<cr>:NvimTreeFocus<cr>
+  nnoremap <Leader>e :NvimTreeToggle .<cr>:NvimTreeResize 34<cr>
+  nnoremap <Leader>fe :NvimTreeFindFile<cr>:NvimTreeResize 34<cr>:NvimTreeFocus<cr>
 endif
 
 if dein#tap('splitjoin.vim')
@@ -122,16 +122,16 @@ if dein#tap('accelerated-jk')
 endif
 
 if dein#tap('vim-choosewin')
-	nmap -         <Plug>(choosewin)
-	nmap <Leader>- <cmd>ChooseWinSwapStay<CR>
+  nmap -         <Plug>(choosewin)
+  nmap <Leader>- <cmd>ChooseWinSwapStay<CR>
 endif
 
 if dein#tap('hop.nvim')
-	noremap <Leader>fw <cmd>HopWord<cr>
-	noremap <Leader>fa <cmd>HopAnywhere<cr>
-	noremap <Leader>fl <cmd>HopLine<cr>
-	noremap <Leader>fc <cmd>HopChar1<cr>
-	noremap <Leader>fb <cmd>HopChar2<cr>
+  noremap <Leader>fw <cmd>HopWord<cr>
+  noremap <Leader>fa <cmd>HopAnywhere<cr>
+  noremap <Leader>fl <cmd>HopLine<cr>
+  noremap <Leader>fc <cmd>HopChar1<cr>
+  noremap <Leader>fb <cmd>HopChar2<cr>
 endif
 
 if dein#tap('omnisharp-vim')
@@ -139,12 +139,12 @@ if dein#tap('omnisharp-vim')
 endif
 
 if dein#tap('sideways.vim')
-  noremap <Leader>sh <cmd>SidewaysLeft<cr>
-  noremap <Leader>sl <cmd>SidewaysRight<cr>
-  nmap <leader>si <Plug>SidewaysArgumentInsertBefore
-  nmap <leader>sa <Plug>SidewaysArgumentAppendAfter
-  nmap <leader>sI <Plug>SidewaysArgumentInsertFirst
-  nmap <leader>sA <Plug>SidewaysArgumentAppendLast
+  noremap <Leader>ah <cmd>SidewaysLeft<cr>
+  noremap <Leader>al <cmd>SidewaysRight<cr>
+  nmap <leader>ai <Plug>SidewaysArgumentInsertBefore
+  nmap <leader>aa <Plug>SidewaysArgumentAppendAfter
+  nmap <leader>aI <Plug>SidewaysArgumentInsertFirst
+  nmap <leader>aA <Plug>SidewaysArgumentAppendLast
 endif
 
 if dein#tap('symbols-outline.nvim')

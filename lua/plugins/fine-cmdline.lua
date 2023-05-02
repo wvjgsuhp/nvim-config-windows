@@ -3,7 +3,7 @@ local function setup()
     cmdline = {
       enable_keymaps = true,
       smart_history = true,
-      prompt = '❯ '
+      prompt = " "
     },
     popup = {
       position = {
@@ -17,7 +17,7 @@ local function setup()
         style = 'rounded',
       },
       win_options = {
-        winhighlight = 'Normal:Normal,FloatBorder:FloatBorder',
+        winhighlight = 'Normal:Normal,FloatBorder:SpecialChar',
       },
     },
     hooks = {
