@@ -70,6 +70,7 @@ local function on_attach(bufnr)
   --
   -- You will need to insert "your code goes here" for any mappings with a custom action_cb
   vim.keymap.set("n", "<c-space>", api.node.open.edit, opts("Open"))
+  vim.keymap.set("n", "<esc>", api.tree.close, opts("Close"))
 end
 
 -- OR setup with some options

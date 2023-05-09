@@ -1,6 +1,8 @@
 " Mapping
 let mapleader = ' '
 
+nnoremap <Leader>cf" f"ci"
+
 " Go from terminal to normal mode
 tnoremap <Esc> <C-\><C-n>
 command! ToggleTerminal call interface#toggleTerminal()
