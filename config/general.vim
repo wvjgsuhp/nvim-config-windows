@@ -7,12 +7,8 @@ set winbar+=%{%v:lua.require'nvim-navic'.get_location()%}
 set showtabline=0
 set synmaxcol=2048
 set colorcolumn=80
-
-if has('folding') && has('vim_starting')
-  set foldenable
-  set foldmethod=indent
-  set foldlevel=99
-endif
+set foldmethod=expr
+set nofoldenable
 
 function! Recording()
   let l:recording_register = reg_recording()
@@ -25,13 +21,17 @@ endfunction
 
 " Statusline
 let g:airline_powerline_fonts = 1
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_section_c = '%{Recording()}%f%m'
+
+call airline#parts#define_function('recording', 'Recording')
+call airline#parts#define_accent('recording', 'red')
+let s:section_c = [
+  \ 'recording', '%<', 'file', ' ', 'readonly', 'coc_status', 'lsp_progress']
+let g:airline_section_c = airline#section#create(s:section_c)
+
 let g:airline_section_y = '%{strftime("%H:%M")}'
-let g:airline_section_z = airline#section#create([g:airline_symbols.colnr, '%v'])
+let g:airline_section_z = 'c:%v'
 let g:airline_detect_spell = 0
 let g:airline#extensions#default#section_truncate_width = {
   \ 'b': 79,
@@ -94,6 +94,12 @@ let g:neoformat_sql_sqlformat = {
 let g:neoformat_python_autopep8 = {
   \ 'exe': 'autopep8',
   \ 'args': ['--max-line-length=80', '--experimental'],
+\ }
+
+let g:neoformat_lua_stylua = {
+  \ 'exe': 'stylua',
+  \ 'args': ['--indent-type="Spaces"', '--indent-width=2'],
+  \ 'replace': 1,
 \ }
 
 augroup formatting

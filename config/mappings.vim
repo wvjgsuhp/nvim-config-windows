@@ -4,11 +4,15 @@ let mapleader = ' '
 " Go from terminal to normal mode
 tnoremap <Esc> <C-\><C-n>
 command! ToggleTerminal call interface#toggleTerminal()
-nnoremap <Leader>` :ToggleTerminal<cr>
+nnoremap <Leader>` <cmd>ToggleTerminal<cr>
 
 " Paste
 nnoremap <Leader>piw viwpyiw
 nnoremap <Leader>pa ggVGp
+
+" Paste in visual-mode without pushing to register
+xnoremap p :call <SID>visual_paste('p')<CR>
+xnoremap P :call <SID>visual_paste('P')<CR>
 
 " Go to tab by number
 noremap <Leader>1 1gt
@@ -24,7 +28,9 @@ noremap <Leader>0 <cmd>tablast<cr>
 
 " Jump to the beginning/end of a line
 noremap <Leader>h ^
-noremap <Leader>l $
+nnoremap <Leader>l $
+onoremap <Leader>l $
+xnoremap <Leader>l $h
 
 " Open terminal
 noremap <Leader>zz <cmd>terminal<cr>i
@@ -40,10 +46,26 @@ noremap <Leader>q <cmd>e!<cr>
 " Open previous buffer
 noremap <Leader>bb <c-^>
 
+" Toggle fold
+nmap <CR> za
+nmap <Leader><Leader> za
+
 " Yank
-nnoremap <Leader>yfn <cmd>let @+=expand("%")<CR><cmd>echo 'Yanked filename'<CR>
-nnoremap <Leader>yrp <cmd>let @+=expand("%:~:.")<CR><cmd>echo 'Yanked relative path'<CR>
-nnoremap <Leader>yap <cmd>let @+=expand("%:p")<CR><cmd>echo 'Yanked absolute path'<CR>
+if dein#tap('nvim-notify')
+  nnoremap <Leader>yfn <cmd>let @+=expand("%:t")<CR>
+    \ :lua vim.notify('Yanked filename: <c-r>+', 'info')<CR>
+  nnoremap <Leader>yrp <cmd>let @+=expand("%:~:.")<CR>
+    \ :lua vim.notify('Yanked relative path: <c-r>+', 'info')<CR>
+  nnoremap <Leader>yap <cmd>let @+=expand("%:p")<CR>
+    \ :lua vim.notify('Yanked absolute path: <c-r>+', 'info')<CR>
+else
+  nnoremap <Leader>yfn <cmd>let @+=expand("%:t")<CR>
+    \ <cmd>echo 'Yanked filename: <c-r>+'<CR>
+  nnoremap <Leader>yrp <cmd>let @+=expand("%:~:.")<CR>
+    \ <cmd>echo 'Yanked relative path: <c-r>+'<CR>
+  nnoremap <Leader>yap <cmd>let @+=expand("%:p")<CR>
+    \ <cmd>echo 'Yanked absolute path: <c-r>+'<CR>
+endif
 nnoremap <Leader>yaa ggyG''
 nnoremap <Leader>ypG VGyGp
 
@@ -68,14 +90,14 @@ nnoremap <Leader>gpn 6kyyGpi
 " Find
 nnoremap <Leader>fp /<C-r>0<cr>zz
 nnoremap <Leader>fiw yiw/<C-r>0<cr>Nzz
-nnoremap <Leader>fn :Navbuddy<cr>
+nnoremap <Leader>fn <cmd>Navbuddy<cr>
 
 " Use backspace key for matching parens
 nnoremap <BS> %
 xnoremap <BS> %
 
 " Center focused line
-let line_moved_commands = ['u', 'e', '<c-r>', 'n', 'N', 'G', 'w', 'b', '``', 'p']
+let line_moved_commands = ['u', 'e', '<c-r>', 'n', 'N', 'G', 'w', 'b', '``', 'p', 'za']
 for cmd in line_moved_commands
   execute 'nmap <silent> '.cmd.' '.cmd.'zz'
   execute 'vmap <silent> '.cmd.' '.cmd.'zz'
@@ -92,10 +114,10 @@ xnoremap <C-s> <cmd>silent write<CR>
 cnoremap <C-s> <cmd>silent write<CR>
 
 " Use ctrl-[hjkl] to select the active split!
-nmap <silent> <c-k> :wincmd k<CR>
-nmap <silent> <c-j> :wincmd j<CR>
-nmap <silent> <c-h> :wincmd h<CR>
-nmap <silent> <c-l> :wincmd l<CR>
+nmap <silent> <c-k> <cmd>wincmd k<CR>
+nmap <silent> <c-j> <cmd>wincmd j<CR>
+nmap <silent> <c-h> <cmd>wincmd h<CR>
+nmap <silent> <c-l> <cmd>wincmd l<CR>
 
 " Buffer
 nnoremap <silent> <F12> <cmd>bn<CR>
@@ -107,8 +129,8 @@ nnoremap <silent> <A-{> <cmd>bp<CR>
 nnoremap <Leader>ze :e ~/.zshrc<cr>
 
 if dein#tap('nvim-tree.lua')
-  nnoremap <Leader>e :NvimTreeToggle .<cr>:NvimTreeResize 34<cr>
-  nnoremap <Leader>fe :NvimTreeFindFile<cr>:NvimTreeResize 34<cr>:NvimTreeFocus<cr>
+  nnoremap <Leader>e <cmd>NvimTreeToggle .<cr><cmd>NvimTreeResize 34<cr>
+  nnoremap <Leader>fe <cmd>NvimTreeFindFile<cr><cmd>NvimTreeResize 34<cr><cmd>NvimTreeFocus<cr>
 endif
 
 if dein#tap('splitjoin.vim')
@@ -131,7 +153,7 @@ if dein#tap('hop.nvim')
   noremap <Leader>fa <cmd>HopAnywhere<cr>
   noremap <Leader>fl <cmd>HopLine<cr>
   noremap <Leader>fc <cmd>HopChar1<cr>
-  noremap <Leader>fb <cmd>HopChar2<cr>
+  " noremap <Leader>fb <cmd>HopChar2<cr>
 endif
 
 if dein#tap('omnisharp-vim')
@@ -148,7 +170,7 @@ if dein#tap('sideways.vim')
 endif
 
 if dein#tap('symbols-outline.nvim')
-  nmap <leader>fs :SymbolsOutline<cr>
+  nmap <leader>fs <cmd>SymbolsOutline<cr>
 endif
 
 if dein#tap('fine-cmdline.nvim')
@@ -160,5 +182,9 @@ if dein#tap('telescope.nvim')
   nnoremap <Leader>ff <cmd>Telescope find_files<CR>
   nnoremap <Leader>fg <cmd>Telescope live_grep<CR>
   nnoremap <Leader>fz <cmd>Telescope grep_string<CR>
-  nnoremap <Leader>cbf <cmd>Telescope current_buffer_fuzzy_find<CR>
+  nnoremap <Leader>fb <cmd>Telescope current_buffer_fuzzy_find<CR>
+endif
+
+if dein#tap('fsread.nvim')
+  nnoremap <Leader>br <cmd>FSToggle<CR>
 endif

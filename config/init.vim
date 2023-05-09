@@ -33,14 +33,6 @@ if ! has('nvim')
 	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
-" Disable vim distribution plugins
-
-" let g:loaded_gzip = 1
-" let g:loaded_tar = 1
-" let g:loaded_tarPlugin = 1
-" let g:loaded_zip = 1
-" let g:loaded_zipPlugin = 1
-
 let g:loaded_getscript = 1
 let g:loaded_getscriptPlugin = 1
 let g:loaded_vimball = 1
@@ -53,11 +45,6 @@ let g:loaded_logiPat = 1
 let g:loaded_rrhelper = 1
 let g:no_gitrebase_maps = 1
 let g:no_man_maps = 1  " See share/nvim/runtime/ftplugin/man.vim
-
-let g:loaded_netrw = 1
-let g:loaded_netrwPlugin = 1
-let g:loaded_netrwSettings = 1
-let g:loaded_netrwFileHandlers = 1
 
 " Set main configuration directory as parent directory
 let $VIM_PATH =
