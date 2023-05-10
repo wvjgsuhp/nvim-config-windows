@@ -9,24 +9,12 @@ command! ToggleTerminal call interface#toggleTerminal()
 nnoremap <Leader>` <cmd>ToggleTerminal<cr>
 
 " Paste
-nnoremap <Leader>piw viwpyiw
-nnoremap <Leader>pa ggVGp
+nmap <Leader>piw viwp
+nmap <Leader>pa ggVGp
 
 " Paste in visual-mode without pushing to register
 xnoremap p :call <SID>visual_paste('p')<CR>
 xnoremap P :call <SID>visual_paste('P')<CR>
-
-" Go to tab by number
-noremap <Leader>1 1gt
-noremap <Leader>2 2gt
-noremap <Leader>3 3gt
-noremap <Leader>4 4gt
-noremap <Leader>5 5gt
-noremap <Leader>6 6gt
-noremap <Leader>7 7gt
-noremap <Leader>8 8gt
-noremap <Leader>9 9gt
-noremap <Leader>0 <cmd>tablast<cr>
 
 " Jump to the beginning/end of a line
 noremap <Leader>h ^
@@ -36,8 +24,8 @@ xnoremap <Leader>l $h
 
 " Open terminal
 noremap <Leader>zz <cmd>terminal<cr>i
-noremap <Leader>zj <cmd>split<cr><bar><cmd>wincmd j<cr><bar><cmd>terminal<cr>13<c-w>_i
-noremap <Leader>zl <cmd>vsplit<cr><bar><cmd>wincmd l<cr><bar><cmd>terminal<cr>i
+noremap <Leader>zj <cmd>split<bar>terminal<cr>13<c-w>_i
+nmap <Leader>zl <cmd>vsplit<cr> zz
 
 " Preview markdown
 noremap <Leader>mp <cmd>term glow %<cr>
@@ -85,6 +73,7 @@ nnoremap <Leader>xd <cmd>Trouble document_diagnostics<cr>
 nnoremap <Leader>xw <cmd>Trouble workspace_diagnostics<cr>
 
 " Git
+nnoremap <Leader>gds <cmd>Gvdiffsplit!<cr>
 nnoremap <Leader>gdh <cmd>diffget //2<cr>
 nnoremap <Leader>gdl <cmd>diffget //3<cr>
 nnoremap <Leader>gpn 6kyyGpi
@@ -130,9 +119,17 @@ nnoremap <silent> <A-{> <cmd>bp<CR>
 " Edit file
 nnoremap <Leader>ze :e ~/.zshrc<cr>
 
+" Print messages to buffer
+nnoremap <Leader>mb <cmd>put =execute('messages')<cr>
+nmap <Leader>ml <cmd>vs<bar>execute 'edit'
+  \ strftime('vim-messages-%Y-%m-%d.%H-%M-%S.log')<cr> mb
+nmap <Leader>mj <cmd>sp<bar>execute 'edit'
+  \ strftime('vim-messages-%Y-%m-%d.%H-%M-%S.log')<cr> mb
+
 if dein#tap('nvim-tree.lua')
-  nnoremap <Leader>e <cmd>NvimTreeToggle .<cr><cmd>NvimTreeResize 34<cr>
-  nnoremap <Leader>fe <cmd>NvimTreeFindFile<cr><cmd>NvimTreeResize 34<cr><cmd>NvimTreeFocus<cr>
+  nnoremap <Leader>e <cmd>NvimTreeToggle .<bar>NvimTreeResize 34<cr>
+  nnoremap <Leader>fe <cmd>NvimTreeFindFile<bar>NvimTreeResize 34<bar>
+    \ NvimTreeFocus<cr>
 endif
 
 if dein#tap('splitjoin.vim')

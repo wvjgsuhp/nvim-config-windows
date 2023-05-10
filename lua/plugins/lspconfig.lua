@@ -76,9 +76,9 @@ local on_attach = function(client, bufnr)
     )
   end
 
-  if client.server_capabilities.documentSymbolProvider then
-    require("nvim-navbuddy").attach(client, bufnr)
-  end
+  -- if client.server_capabilities.documentSymbolProvider then
+  --   require("nvim-navbuddy").attach(client, bufnr)
+  -- end
 
   -- https://nicolaiarocci.com/making-csharp-and-omnisharp-play-well-with-neovim/
   if client.name == "omnisharp" then
@@ -172,12 +172,17 @@ local function make_config(server_name)
   local exists, module = pcall(require, "lsp-local." .. server_name)
   if not exists then
     exists, module = pcall(require, "lsp." .. server_name)
-  end
-  if exists then
+  else
+    -- end
+    -- if exists then
     local user_config = module.config(c)
     for k, v in pairs(user_config) do
       c[k] = v
     end
+  end
+
+  if server_name == "tsserver" and vim.g.is_unix == 0 then
+    c["cmd"] = { "typescript-language-server.cmd", "--stdio" }
   end
 
   return c
@@ -221,10 +226,30 @@ local function setup()
   -- See https://github.com/williamboman/nvim-lsp-installer
   local lsp_installer = require("nvim-lsp-installer")
   lsp_installer.setup()
+
+  -- Dump for debugging
+  -- local function dump(o)
+  --   if type(o) == "table" then
+  --     local s = "{ "
+  --     for k, v in pairs(o) do
+  --       if type(k) ~= "number" then
+  --         k = '"' .. k .. '"'
+  --       end
+  --       s = s .. "[" .. k .. "] = " .. dump(v) .. ","
+  --     end
+  --     return s .. "} "
+  --   else
+  --     return tostring(o)
+  --   end
+  -- end
+
   -- Setup language servers using nvim-lspconfig
   local lspconfig = require("lspconfig")
   for _, ls in pairs(lsp_installer.get_installed_servers()) do
     local opts = make_config(ls.name)
+    -- print(ls.name)
+    -- print(dump(opts))
+    -- print("===========================================================")
     lspconfig[ls.name].setup(opts)
   end
 
@@ -240,16 +265,14 @@ local function setup()
   require("nvim-lightbulb").setup({ ignore = { "null-ls" } })
 
   vim.api.nvim_exec(
-    [[
-    augroup user_lspconfig
+    [[augroup user_lspconfig
       autocmd!
 
       " See https://github.com/kosayoda/nvim-lightbulb
       autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
       " Automatic diagnostic hover
       " autocmd CursorHold * lua require("user").diagnostic.open_float({ focusable=false })
-    augroup END
-  ]],
+    augroup END]],
     false
   )
 end
@@ -258,4 +281,3 @@ return {
   setup = setup,
   on_attach = on_attach,
 }
-

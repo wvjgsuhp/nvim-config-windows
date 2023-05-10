@@ -1,14 +1,22 @@
 let g:python3_host_prog = $HOME . '/.config/nvim/env/bin/python3'
 
+set splitbelow
+set splitright
 set cmdheight=0
 set clipboard+=unnamedplus     " Yank without explicit registration
 set ignorecase
-set winbar+=%{%v:lua.require'nvim-navic'.get_location()%}
+" set winbar+=%{%v:lua.require'nvim-navic'.get_location()%}
 set showtabline=0
 set synmaxcol=2048
 set colorcolumn=80
 set foldmethod=expr
 set nofoldenable
+set clipboard+=unnamedplus     " Yank without explicit registration
+set showcmd
+set number                     " Show current line number
+set relativenumber             " Show relative line numbers
+set tabstop=2 shiftwidth=2 expandtab
+set exrc
 
 function! Recording()
   let l:recording_register = reg_recording()
@@ -63,13 +71,6 @@ let g:airline_mode_map = {
 \ }
 " Mitigate error with git bash https://github.com/vim-airline/vim-airline/issues/2479
 let g:airline#extensions#branch#vcs_checks = []
-
-set clipboard+=unnamedplus     " Yank without explicit registration
-set showcmd
-set number                     " Show current line number
-set relativenumber             " Show relative line numbers
-set tabstop=2 shiftwidth=2 expandtab
-set exrc
 
 augroup tabs
   autocmd!
