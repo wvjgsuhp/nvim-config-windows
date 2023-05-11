@@ -195,6 +195,7 @@ endif
 
 if dein#tap('vim-fugitive')
   nnoremap <Leader>gs <cmd>G status<CR>
+  nnoremap <Leader>gp <cmd>G push<CR>
   nmap <Leader>gac :G commit -am ''<Left>
   nnoremap <Leader>gaa <cmd>G add .<CR>
 endif
