@@ -73,6 +73,7 @@ nnoremap <Leader>xd <cmd>Trouble document_diagnostics<cr>
 nnoremap <Leader>xw <cmd>Trouble workspace_diagnostics<cr>
 
 " Git
+nnoremap <Leader>gdo <cmd>DiffviewOpen<cr>
 nnoremap <Leader>gds <cmd>Gvdiffsplit!<cr>
 nnoremap <Leader>gdh <cmd>diffget //2<cr>
 nnoremap <Leader>gdl <cmd>diffget //3<cr>
@@ -186,4 +187,14 @@ endif
 
 if dein#tap('fsread.nvim')
   nnoremap <Leader>br <cmd>FSToggle<CR>
+endif
+
+if dein#tap('gitsigns')
+  nnoremap <Leader>gh <cmd>Gitsigns next_hunk<CR>
+endif
+
+if dein#tap('vim-fugitive')
+  nnoremap <Leader>gs <cmd>G status<CR>
+  nmap <Leader>gac :G commit -am ''<Left>
+  nnoremap <Leader>gaa <cmd>G add .<CR>
 endif

@@ -6,6 +6,7 @@
 -- rafi settings
 
 -- Buffer attached
+local navic = require("nvim-navic")
 local on_attach = function(client, bufnr)
   local function map_buf(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -46,17 +47,6 @@ local on_attach = function(client, bufnr)
     map_buf("x", ",f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
 
-  -- lsp_signature.nvim
-  -- See https://github.com/ray-x/lsp_signature.nvim
-  -- require('lsp_signature').on_attach({
-  --  bind = true,
-  --  check_pumvisible = true,
-  --  hint_enable = false,
-  --  hint_prefix = ' ',  --  
-  --  handler_opts = { border = 'rounded' },
-  --  zindex = 50,
-  -- }, bufnr)
-
   if client.config.flags then
     client.config.flags.allow_incremental_sync = true
     -- client.config.flags.debounce_text_changes  = vim.opt.updatetime:get()
@@ -65,20 +55,19 @@ local on_attach = function(client, bufnr)
   -- Set autocommands conditional on server capabilities
   if client.supports_method("textDocument/documentHighlight") then
     vim.api.nvim_exec(
-      [[
-      augroup lsp_document_highlight
+      [[augroup lsp_document_highlight
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]],
+      augroup END]],
       false
     )
   end
 
-  -- if client.server_capabilities.documentSymbolProvider then
-  --   require("nvim-navbuddy").attach(client, bufnr)
-  -- end
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+    -- require("nvim-navbuddy").attach(client, bufnr)
+  end
 
   -- https://nicolaiarocci.com/making-csharp-and-omnisharp-play-well-with-neovim/
   if client.name == "omnisharp" then

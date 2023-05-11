@@ -5,7 +5,6 @@ set splitright
 set cmdheight=0
 set clipboard+=unnamedplus     " Yank without explicit registration
 set ignorecase
-" set winbar+=%{%v:lua.require'nvim-navic'.get_location()%}
 set showtabline=0
 set synmaxcol=2048
 set colorcolumn=80
@@ -31,6 +30,7 @@ endfunction
 let g:airline_powerline_fonts = 1
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
+" let g:airline_section_b = airline#section#create(['hunks', 'branch'])
 
 call airline#parts#define_function('recording', 'Recording')
 call airline#parts#define_accent('recording', 'red')
@@ -147,25 +147,25 @@ augroup user_general_settings
   " Show sign column only for normal file buffers.
   if exists('&signcolumn')
     autocmd FileType * if empty(&buftype)
-          \ | setlocal signcolumn=yes
-          \ | endif
+      \ | setlocal signcolumn=yes
+      \ | endif
   endif
 
   " Highlight current line only on focused normal buffer windows
   autocmd WinEnter,BufEnter,InsertLeave *
-        \ if ! &cursorline && empty(&buftype)
-        \ | setlocal cursorline
-        \ | endif
+    \ if ! &cursorline && empty(&buftype)
+    \ | setlocal cursorline
+    \ | endif
 
   " Hide cursor line when leaving normal non-diff windows
   autocmd WinLeave,BufLeave,InsertEnter *
-        \ if &cursorline && ! &diff && empty(&buftype) && ! &pvw && ! pumvisible()
-        \ | setlocal nocursorline
-        \ | endif
+    \ if &cursorline && ! &diff && empty(&buftype) && ! &pvw && ! pumvisible()
+    \ | setlocal nocursorline
+    \ | endif
 
   " Reload vim configuration automatically on-save
-  " autocmd BufWritePost $VIM_PATH/{*.vim,*.yaml,vimrc} ++nested
-        " \ source $MYVIMRC | redraw
+  autocmd BufWritePost $VIM_PATH/{*.vim,*.yaml} ++nested
+    \ execute 'source ' . $VIM_PATH . '/init.vim' | redraw
 
   " Automatically set read-only for files being edited elsewhere
   autocmd SwapExists * ++nested let v:swapchoice = 'o'
@@ -188,7 +188,7 @@ augroup user_general_settings
     " Highlight yank
     try
       autocmd TextYankPost *
-            \ silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
+        \ silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150}
     endtry
 
     " Neovim terminal settings
@@ -197,32 +197,32 @@ augroup user_general_settings
 
   " Update filetype on save if empty
   autocmd BufWritePost * ++nested
-        \ if &l:filetype ==# '' || exists('b:ftdetect')
-        \ |   unlet! b:ftdetect
-        \ |   filetype detect
-        \ | endif
+    \ if &l:filetype ==# '' || exists('b:ftdetect')
+    \ |   unlet! b:ftdetect
+    \ |   filetype detect
+    \ | endif
 
   " Reload Vim script automatically if setlocal autoread
   autocmd BufWritePost,FileWritePost *.vim ++nested
-        \ if &l:autoread > 0 | source <afile> |
-        \   echo 'source ' . bufname('%') |
-        \ endif
+    \ if &l:autoread > 0 | source <afile> |
+    \   echo 'source ' . bufname('%') |
+    \ endif
 
   " When editing a file, always jump to the last known cursor position.
   " Credits: https://github.com/farmergreg/vim-lastplace
   autocmd BufReadPost *
-        \ if index(['gitcommit', 'gitrebase', 'svn', 'hgcommit'], &filetype) == -1
-        \      && empty(&buftype) && ! &diff && ! &previewwindow
-        \      && line("'\"") > 0 && line("'\"") <= line("$")
-        \|   if line("w$") == line("$")
-        \|     execute "normal! g`\""
-        \|   elseif line("$") - line("'\"") > ((line("w$") - line("w0")) / 2) - 1
-        \|     execute "normal! g`\"zz"
-        \|   else
-        \|     execute "normal! \G'\"\<c-e>"
-        \|   endif
-        \|   if foldclosed('.') != -1
-        \|     execute 'normal! zvzz'
-        \|   endif
-        \| endif
+    \ if index(['gitcommit', 'gitrebase', 'svn', 'hgcommit'], &filetype) == -1
+    \      && empty(&buftype) && ! &diff && ! &previewwindow
+    \      && line("'\"") > 0 && line("'\"") <= line("$")
+    \|   if line("w$") == line("$")
+    \|     execute "normal! g`\""
+    \|   elseif line("$") - line("'\"") > ((line("w$") - line("w0")) / 2) - 1
+    \|     execute "normal! g`\"zz"
+    \|   else
+    \|     execute "normal! \G'\"\<c-e>"
+    \|   endif
+    \|   if foldclosed('.') != -1
+    \|     execute 'normal! zvzz'
+    \|   endif
+    \| endif
 augroup END

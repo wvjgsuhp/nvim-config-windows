@@ -31,7 +31,6 @@ endfunction
 call s:source_file('config\init.vim')
 call s:source_file('config\general.vim')
 call s:source_file('config\mappings.vim')
-call s:source_file('config\tabline.vim')
 
 colorscheme github
 set background=light
